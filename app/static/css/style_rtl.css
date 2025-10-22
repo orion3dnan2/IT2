@@ -1,0 +1,136 @@
+/* RTL (Arabic) Stylesheet */
+* {
+    direction: rtl;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    text-align: right;
+}
+
+/* Sidebar positioning */
+.sidebar {
+    right: 0;
+    left: auto;
+}
+
+/* Main content margin */
+.main-content {
+    margin-right: 16rem;
+    margin-left: 0;
+}
+
+@media (max-width: 1024px) {
+    .main-content {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+/* Navigation items */
+.nav-item {
+    text-align: right;
+}
+
+.nav-icon {
+    margin-left: 0.75rem;
+    margin-right: 0;
+}
+
+/* Cards and content */
+.card-content {
+    text-align: right;
+}
+
+/* Tables */
+table {
+    direction: rtl;
+}
+
+th, td {
+    text-align: right !important;
+}
+
+th.text-center, td.text-center {
+    text-align: center !important;
+}
+
+/* Forms */
+input, select, textarea {
+    text-align: right;
+}
+
+/* Buttons with icons */
+.btn-icon-left {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+.btn-icon-right {
+    margin-right: 0.5rem;
+    margin-left: 0;
+}
+
+/* Flex layouts */
+.flex-row {
+    flex-direction: row-reverse;
+}
+
+/* Badges and tags */
+.badge {
+    margin-right: 0.5rem;
+    margin-left: 0;
+}
+
+/* Dropdowns */
+.dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+/* Responsive sidebar */
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+}
+
+/* Smooth transitions */
+.sidebar, .main-content {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Fix Tailwind RTL issues */
+[dir="rtl"] .space-x-reverse > * + * {
+    margin-left: 0;
+    margin-right: 1rem;
+}
+
+[dir="rtl"] .space-x-2 > * + * {
+    margin-left: 0;
+    margin-right: 0.5rem;
+}
+
+[dir="rtl"] .space-x-4 > * + * {
+    margin-left: 0;
+    margin-right: 1rem;
+}
+
+/* Grid layouts */
+[dir="rtl"] .grid {
+    direction: rtl;
+}
+
+/* Pagination */
+[dir="rtl"] .pagination {
+    flex-direction: row-reverse;
+}
+
+/* Alerts and notifications */
+[dir="rtl"] .alert {
+    text-align: right;
+}

@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="flex h-screen overflow-hidden">
-    <aside id="sidebar" class="w-64 bg-gradient-to-b from-blue-900 to-blue-800 dark:from-gray-800 dark:to-gray-900 text-white fixed inset-y-0 {% if session.get('language') == 'ar' %}right-0 translate-x-full lg:translate-x-0{% else %}left-0 -translate-x-full lg:translate-x-0{% endif %} transform transition-transform duration-300 z-20">
+    <aside id="sidebar" class="sidebar w-64 bg-gradient-to-b from-blue-900 to-blue-800 dark:from-gray-800 dark:to-gray-900 text-white fixed inset-y-0 {% if session.get('language') == 'ar' %}right-0{% else %}left-0{% endif %} transform transition-transform duration-300 z-20 {% if session.get('language') == 'ar' %}translate-x-full lg:translate-x-0{% else %}-translate-x-full lg:translate-x-0{% endif %}">
         <div class="flex items-center justify-center h-20 border-b border-blue-700 dark:border-gray-700">
             <h1 class="text-2xl font-bold">
                 <i class="fas fa-server {% if session.get('language') == 'ar' %}ml-2{% else %}mr-2{% endif %}"></i>
@@ -11,23 +11,23 @@
         </div>
         
         <nav class="px-4 py-6 space-y-2">
-            <a href="{{ url_for('dashboard.index') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-gray-700 transition-colors {% if request.endpoint == 'dashboard.index' %}bg-blue-700 dark:bg-gray-700{% endif %}">
-                <i class="fas fa-chart-line w-6 {% if session.get('language') == 'ar' %}ml-3{% else %}mr-3{% endif %}"></i>
+            <a href="{{ url_for('dashboard.index') }}" class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-gray-700 transition-colors {% if request.endpoint == 'dashboard.index' %}bg-blue-700 dark:bg-gray-700{% endif %}">
+                <i class="fas fa-chart-line nav-icon w-6"></i>
                 <span>{{ _('Dashboard') }}</span>
             </a>
             
-            <a href="{{ url_for('assets.index') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-gray-700 transition-colors {% if 'assets' in request.endpoint %}bg-blue-700 dark:bg-gray-700{% endif %}">
-                <i class="fas fa-laptop w-6 {% if session.get('language') == 'ar' %}ml-3{% else %}mr-3{% endif %}"></i>
+            <a href="{{ url_for('assets.index') }}" class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-gray-700 transition-colors {% if 'assets' in request.endpoint %}bg-blue-700 dark:bg-gray-700{% endif %}">
+                <i class="fas fa-laptop nav-icon w-6"></i>
                 <span>{{ _('Assets') }}</span>
             </a>
             
-            <a href="{{ url_for('employees.index') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-gray-700 transition-colors {% if 'employees' in request.endpoint %}bg-blue-700 dark:bg-gray-700{% endif %}">
-                <i class="fas fa-users w-6 {% if session.get('language') == 'ar' %}ml-3{% else %}mr-3{% endif %}"></i>
+            <a href="{{ url_for('employees.index') }}" class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-gray-700 transition-colors {% if 'employees' in request.endpoint %}bg-blue-700 dark:bg-gray-700{% endif %}">
+                <i class="fas fa-users nav-icon w-6"></i>
                 <span>{{ _('Employees') }}</span>
             </a>
             
-            <a href="{{ url_for('maintenance.index') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-gray-700 transition-colors {% if 'maintenance' in request.endpoint %}bg-blue-700 dark:bg-gray-700{% endif %}">
-                <i class="fas fa-tools w-6 {% if session.get('language') == 'ar' %}ml-3{% else %}mr-3{% endif %}"></i>
+            <a href="{{ url_for('maintenance.index') }}" class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-gray-700 transition-colors {% if 'maintenance' in request.endpoint %}bg-blue-700 dark:bg-gray-700{% endif %}">
+                <i class="fas fa-tools nav-icon w-6"></i>
                 <span>{{ _('Maintenance') }}</span>
             </a>
         </nav>
@@ -47,7 +47,7 @@
         </div>
     </aside>
     
-    <div class="flex-1 flex flex-col overflow-hidden {% if session.get('language') == 'ar' %}lg:mr-64{% else %}lg:ml-64{% endif %}">
+    <div class="main-content flex-1 flex flex-col overflow-hidden {% if session.get('language') == 'ar' %}lg:mr-64{% else %}lg:ml-64{% endif %}">
         <header class="bg-white dark:bg-gray-800 shadow-sm h-20 flex items-center justify-between px-6">
             <button id="menu-toggle" class="lg:hidden text-gray-600 dark:text-gray-300">
                 <i class="fas fa-bars text-2xl"></i>
@@ -89,21 +89,36 @@
     const menuToggle = document.getElementById('menu-toggle');
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const isRTL = document.documentElement.dir === 'rtl';
     
     menuToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('-translate-x-full');
-        {% if session.get('language') == 'ar' %}
-        sidebar.classList.toggle('translate-x-full');
-        {% endif %}
+        if (isRTL) {
+            sidebar.classList.toggle('translate-x-full');
+        } else {
+            sidebar.classList.toggle('-translate-x-full');
+        }
         sidebarOverlay.classList.toggle('hidden');
     });
     
     sidebarOverlay.addEventListener('click', () => {
-        sidebar.classList.add('-translate-x-full');
-        {% if session.get('language') == 'ar' %}
-        sidebar.classList.add('translate-x-full');
-        {% endif %}
+        if (isRTL) {
+            sidebar.classList.add('translate-x-full');
+        } else {
+            sidebar.classList.add('-translate-x-full');
+        }
         sidebarOverlay.classList.add('hidden');
+    });
+    
+    // Close sidebar on window resize to large screen
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024) {
+            if (isRTL) {
+                sidebar.classList.remove('translate-x-full');
+            } else {
+                sidebar.classList.remove('-translate-x-full');
+            }
+            sidebarOverlay.classList.add('hidden');
+        }
     });
 </script>
 {% endblock %}

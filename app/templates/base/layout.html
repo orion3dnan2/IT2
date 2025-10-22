@@ -6,17 +6,14 @@
     <title>{% block title %}IT Asset Management{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/rtl.css') }}">
+    
     {% if session.get('language') == 'ar' %}
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Cairo', sans-serif; }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_rtl.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/rtl.css') }}">
     {% else %}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_ltr.css') }}">
     {% endif %}
     <script>
         tailwind.config = {
@@ -39,6 +36,18 @@
         .dark .text-gray-700 { color: #d1d5db; }
         .dark .text-gray-600 { color: #9ca3af; }
         .dark .border-gray-200 { border-color: #4b5563; }
+        
+        /* Smooth language switching animation */
+        html, body {
+            transition: direction 0.3s ease-in-out;
+        }
+        
+        /* Responsive utilities */
+        @media (max-width: 768px) {
+            .mobile-hidden {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">

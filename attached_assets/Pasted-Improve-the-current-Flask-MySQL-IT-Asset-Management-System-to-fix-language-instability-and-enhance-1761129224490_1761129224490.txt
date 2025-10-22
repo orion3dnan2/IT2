@@ -1,0 +1,57 @@
+Improve the current Flask + MySQL IT Asset Management System to fix language instability and enhance the overall responsive design.
+
+🎯 Goal:
+Ensure that when the user switches to Arabic, the entire web app (layout, navbar, sidebar, dashboard, charts, and tables) fully switches to RTL direction and Arabic interface — and when switched to English, everything reverts cleanly to LTR. The language should persist across all pages.
+
+---
+
+🧩 Technical Tasks:
+
+1. **Language Direction (RTL/LTR):**
+   - Automatically apply `<html dir="rtl" lang="ar">` when Arabic is active, and `<html dir="ltr" lang="en">` when English is active.
+   - Use Flask-Babel for language management.
+   - Store selected language in `session['lang']` and reload page after switching.
+   - Add a route `/lang/<lang_code>` to change language (ar/en).
+
+2. **Separate Stylesheets:**
+   - Add two CSS files:
+     - `style_rtl.css` → for Arabic layout (right alignment, Cairo or Tajawal font)
+     - `style_ltr.css` → for English layout (left alignment, Inter or Roboto font)
+   - Load dynamically based on the selected language.
+
+3. **Navbar Language Switcher:**
+   - Keep the Arabic/EN toggle at the top-right corner.
+   - Make it reload the app with correct direction and texts.
+
+4. **Dashboard Layout:**
+   - All text, icons, and cards align correctly according to language direction.
+   - RTL version should display Arabic labels properly:
+     - “نظام الأصول”, “الأصول حسب النوع”, “عدد الإدارات”, “الأجهزة قيد الإصلاح” etc.
+   - Use consistent spacing and padding in RTL mode.
+
+5. **Responsive UI Enhancements:**
+   - Use TailwindCSS or Bootstrap 5 responsive grid.
+   - Sidebar collapses automatically on mobile.
+   - Cards and charts adapt to mobile width.
+   - Font size and icon spacing optimized for smaller devices.
+
+6. **Persistence:**
+   - Save selected language in session or user profile.
+   - Ensure switching language updates all UI texts and layout immediately.
+
+7. **Testing:**
+   - Test Arabic mode (RTL) on desktop, tablet, and mobile.
+   - Ensure charts, cards, and tables display correctly with Arabic numerals and labels.
+
+---
+
+🎨 **UI Improvements:**
+- Modern flat color palette (Royal Blue, Emerald Green, Orange, White)
+- Smooth transition animation between languages
+- Consistent rounded cards with shadows
+- Font: “Cairo” (Arabic), “Inter” (English)
+
+---
+
+✅ **Expected Result:**
+A fully bilingual (Arabic-English) Flask web app with stable language switching, correct RTL/LTR rendering, consistent dashboard layout, and a fully responsive interface across all screens and devices.

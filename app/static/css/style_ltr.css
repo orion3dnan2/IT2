@@ -1,0 +1,101 @@
+/* LTR (English) Stylesheet */
+* {
+    direction: ltr;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+}
+
+/* Sidebar positioning */
+.sidebar {
+    left: 0;
+    right: auto;
+}
+
+/* Main content margin */
+.main-content {
+    margin-left: 16rem;
+    margin-right: 0;
+}
+
+@media (max-width: 1024px) {
+    .main-content {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+/* Navigation items */
+.nav-item {
+    text-align: left;
+}
+
+.nav-icon {
+    margin-right: 0.75rem;
+    margin-left: 0;
+}
+
+/* Cards and content */
+.card-content {
+    text-align: left;
+}
+
+/* Tables */
+table {
+    direction: ltr;
+}
+
+th, td {
+    text-align: left;
+}
+
+/* Forms */
+input, select, textarea {
+    text-align: left;
+}
+
+/* Buttons with icons */
+.btn-icon-left {
+    margin-right: 0.5rem;
+    margin-left: 0;
+}
+
+.btn-icon-right {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+/* Flex layouts */
+.flex-row {
+    flex-direction: row;
+}
+
+/* Badges and tags */
+.badge {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+/* Dropdowns */
+.dropdown-menu {
+    left: 0;
+    right: auto;
+}
+
+/* Responsive sidebar */
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+}
+
+/* Smooth transitions */
+.sidebar, .main-content {
+    transition: all 0.3s ease-in-out;
+}
