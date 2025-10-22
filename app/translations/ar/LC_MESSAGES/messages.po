@@ -4,6 +4,9 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Language: ar\n"
 
+msgid "Please log in to access this page."
+msgstr "الرجاء تسجيل الدخول للوصول إلى هذه الصفحة."
+
 msgid "Dashboard"
 msgstr "لوحة التحكم"
 

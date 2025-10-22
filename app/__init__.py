@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from flask_babel import Babel
+from flask_babel import Babel, lazy_gettext as _l
 from config import Config
 import os
 
@@ -20,7 +20,7 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     
     login_manager.login_view = 'auth.login'
-    login_manager.login_message = 'Please log in to access this page.'
+    login_manager.login_message = _l('Please log in to access this page.')
     
     from app.models import User
     
