@@ -1,0 +1,38 @@
+{% extends "base/dashboard_layout.html" %}
+{% block title %}View Employee{% endblock %}
+{% block content %}
+<div class="max-w-6xl mx-auto">
+    <div class="mb-6 flex justify-between items-center">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ employee.name_en }}</h1>
+        <a href="{{ url_for('employees.index') }}" class="px-4 py-2 bg-gray-600 text-white rounded-lg">Back</a>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+            <h2 class="text-xl font-bold mb-4">Employee Details</h2>
+            <dl class="grid grid-cols-2 gap-4">
+                <div><dt class="text-sm text-gray-500">Employee ID</dt><dd class="text-gray-900 dark:text-white">{{ employee.employee_id }}</dd></div>
+                <div><dt class="text-sm text-gray-500">Name (EN)</dt><dd class="text-gray-900 dark:text-white">{{ employee.name_en }}</dd></div>
+                <div><dt class="text-sm text-gray-500">Name (AR)</dt><dd class="text-gray-900 dark:text-white">{{ employee.name_ar }}</dd></div>
+                <div><dt class="text-sm text-gray-500">Job Title</dt><dd class="text-gray-900 dark:text-white">{{ employee.job_title_en or '-' }}</dd></div>
+                <div><dt class="text-sm text-gray-500">Department</dt><dd class="text-gray-900 dark:text-white">{{ employee.department.name_en }}</dd></div>
+                <div><dt class="text-sm text-gray-500">Email</dt><dd class="text-gray-900 dark:text-white">{{ employee.email or '-' }}</dd></div>
+                <div><dt class="text-sm text-gray-500">Phone</dt><dd class="text-gray-900 dark:text-white">{{ employee.phone or '-' }}</dd></div>
+                <div><dt class="text-sm text-gray-500">Status</dt><dd><span class="px-2 py-1 rounded text-xs {% if employee.is_active %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">{% if employee.is_active %}Active{% else %}Inactive{% endif %}</span></dd></div>
+            </dl>
+        </div>
+    </div>
+    {% if assigned_assets %}
+    <div class="mt-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+        <h2 class="text-xl font-bold mb-4">Assigned Assets</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for asset in assigned_assets %}
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                <p class="font-semibold text-gray-900 dark:text-white">{{ asset.asset_id }}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">{{ asset.asset_type|title }} - {{ asset.brand }} {{ asset.model }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

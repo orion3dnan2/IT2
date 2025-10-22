@@ -1,0 +1,38 @@
+{% extends "base/dashboard_layout.html" %}
+{% block title %}{{ _('Maintenance') }}{% endblock %}
+{% block content %}
+<div class="mb-6 flex justify-between items-center">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ _('Maintenance') }}</h1>
+    {% if current_user.has_permission('staff') %}
+    <a href="{{ url_for('maintenance.add') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold"><i class="fas fa-plus mr-2"></i>{{ _('Add Maintenance') }}</a>
+    {% endif %}
+</div>
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <thead class="bg-gray-50 dark:bg-gray-700">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Asset</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Issue</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Technician</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Date</th>
+                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            {% for maintenance in maintenance_records.items %}
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{{ maintenance.asset.asset_id }}</td>
+                <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">{{ maintenance.issue_description_en[:50] }}...</td>
+                <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">{{ maintenance.technician_name or '-' }}</td>
+                <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">{{ maintenance.maintenance_date.strftime('%Y-%m-%d') }}</td>
+                <td class="px-6 py-4 text-sm text-center">
+                    {% if current_user.has_permission('staff') %}<a href="{{ url_for('maintenance.edit', id=maintenance.id) }}" class="text-green-600 hover:text-green-800 mr-3"><i class="fas fa-edit"></i></a>{% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">No maintenance records found</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

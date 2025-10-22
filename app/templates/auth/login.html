@@ -1,0 +1,96 @@
+{% extends "base/layout.html" %}
+
+{% block title %}{{ _('Login') }} - IT Asset Management{% endblock %}
+
+{% block body %}
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 px-4">
+    <div class="max-w-md w-full">
+        <div class="text-center mb-8">
+            <i class="fas fa-server text-6xl text-white mb-4"></i>
+            <h1 class="text-4xl font-bold text-white mb-2">
+                {% if session.get('language') == 'ar' %}
+                نظام إدارة الأصول
+                {% else %}
+                IT Asset Management
+                {% endif %}
+            </h1>
+            <p class="text-blue-200">
+                {% if session.get('language') == 'ar' %}
+                نظام احترافي لإدارة أصول تكنولوجيا المعلومات
+                {% else %}
+                Professional IT Asset Management System
+                {% endif %}
+            </p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{{ _('Login') }}</h2>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="mb-4 p-3 rounded-lg {% if category == 'error' %}bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" action="{{ url_for('auth.login') }}">
+                <div class="mb-4">
+                    <label class="block text-gray-700 dark:text-gray-300 text-sm font-semibold mb-2">
+                        {{ _('Username') }}
+                    </label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 {% if session.get('language') == 'ar' %}right-0 pr-3{% else %}left-0 pl-3{% endif %} flex items-center text-gray-400">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <input type="text" name="username" required
+                               class="w-full {% if session.get('language') == 'ar' %}pr-10{% else %}pl-10{% endif %} pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                               placeholder="{{ _('Username') }}">
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 dark:text-gray-300 text-sm font-semibold mb-2">
+                        {{ _('Password') }}
+                    </label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 {% if session.get('language') == 'ar' %}right-0 pr-3{% else %}left-0 pl-3{% endif %} flex items-center text-gray-400">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input type="password" name="password" required
+                               class="w-full {% if session.get('language') == 'ar' %}pr-10{% else %}pl-10{% endif %} pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                               placeholder="{{ _('Password') }}">
+                    </div>
+                </div>
+                
+                <div class="mb-6 flex items-center">
+                    <input type="checkbox" name="remember" id="remember" class="{% if session.get('language') == 'ar' %}ml-2{% else %}mr-2{% endif %} h-4 w-4 text-blue-600 border-gray-300 rounded">
+                    <label for="remember" class="text-sm text-gray-700 dark:text-gray-300">
+                        {{ _('Remember Me') }}
+                    </label>
+                </div>
+                
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg">
+                    {{ _('Login') }}
+                </button>
+            </form>
+            
+            <div class="mt-6 flex justify-center space-x-4 {% if session.get('language') == 'ar' %}space-x-reverse{% endif %}">
+                <a href="{{ url_for('main.set_language', language='en') }}" class="text-sm {% if session.get('language') != 'ar' %}text-blue-600 font-semibold{% else %}text-gray-500{% endif %}">English</a>
+                <span class="text-gray-400">|</span>
+                <a href="{{ url_for('main.set_language', language='ar') }}" class="text-sm {% if session.get('language') == 'ar' %}text-blue-600 font-semibold{% else %}text-gray-500{% endif %}">العربية</a>
+            </div>
+        </div>
+        
+        <div class="mt-6 text-center text-blue-100 text-sm">
+            {% if session.get('language') == 'ar' %}
+            نظام إدارة أصول تكنولوجيا المعلومات © 2025
+            {% else %}
+            IT Asset Management System © 2025
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

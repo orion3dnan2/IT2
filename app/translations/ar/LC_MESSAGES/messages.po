@@ -1,0 +1,140 @@
+# Arabic translations
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Language: ar\n"
+
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+msgid "Assets"
+msgstr "الأصول"
+
+msgid "Employees"
+msgstr "الموظفون"
+
+msgid "Maintenance"
+msgstr "الصيانة"
+
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+msgid "Username"
+msgstr "اسم المستخدم"
+
+msgid "Password"
+msgstr "كلمة المرور"
+
+msgid "Remember Me"
+msgstr "تذكرني"
+
+msgid "Total Assets"
+msgstr "إجمالي الأصول"
+
+msgid "Total Employees"
+msgstr "إجمالي الموظفين"
+
+msgid "Total Departments"
+msgstr "إجمالي الأقسام"
+
+msgid "Warranty Expiring Soon"
+msgstr "انتهاء الضمان قريباً"
+
+msgid "Add Asset"
+msgstr "إضافة أصل"
+
+msgid "Edit Asset"
+msgstr "تعديل أصل"
+
+msgid "View Asset"
+msgstr "عرض أصل"
+
+msgid "Delete Asset"
+msgstr "حذف أصل"
+
+msgid "Asset ID"
+msgstr "رقم الأصل"
+
+msgid "Asset Type"
+msgstr "نوع الأصل"
+
+msgid "Brand"
+msgstr "العلامة التجارية"
+
+msgid "Model"
+msgstr "الموديل"
+
+msgid "Serial Number"
+msgstr "الرقم التسلسلي"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Purchase Date"
+msgstr "تاريخ الشراء"
+
+msgid "Warranty Expiry"
+msgstr "انتهاء الضمان"
+
+msgid "Location"
+msgstr "الموقع"
+
+msgid "Department"
+msgstr "القسم"
+
+msgid "Assigned To"
+msgstr "مخصص لـ"
+
+msgid "Notes"
+msgstr "ملاحظات"
+
+msgid "Submit"
+msgstr "إرسال"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Filter"
+msgstr "تصفية"
+
+msgid "Add Employee"
+msgstr "إضافة موظف"
+
+msgid "Employee ID"
+msgstr "رقم الموظف"
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Job Title"
+msgstr "المسمى الوظيفي"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Phone"
+msgstr "الهاتف"
+
+msgid "Add Maintenance"
+msgstr "إضافة صيانة"
+
+msgid "Maintenance Date"
+msgstr "تاريخ الصيانة"
+
+msgid "Issue Description"
+msgstr "وصف المشكلة"
+
+msgid "Action Taken"
+msgstr "الإجراء المتخذ"
+
+msgid "Technician Name"
+msgstr "اسم الفني"
+
+msgid "Cost"
+msgstr "التكلفة"

@@ -1,0 +1,156 @@
+{% extends "base/dashboard_layout.html" %}
+
+{% block title %}{{ _('Dashboard') }}{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ _('Dashboard') }}</h1>
+    <p class="text-gray-600 dark:text-gray-400 mt-1">
+        {% if session.get('language') == 'ar' %}
+        نظرة عامة على أصول تكنولوجيا المعلومات
+        {% else %}
+        Overview of IT Assets
+        {% endif %}
+    </p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-blue-100 text-sm font-medium">{{ _('Total Assets') }}</p>
+                <p class="text-3xl font-bold mt-2">{{ total_assets }}</p>
+            </div>
+            <div class="bg-white bg-opacity-20 rounded-full p-4">
+                <i class="fas fa-laptop text-3xl"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl shadow-lg p-6 text-white">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-emerald-100 text-sm font-medium">{{ _('Total Employees') }}</p>
+                <p class="text-3xl font-bold mt-2">{{ total_employees }}</p>
+            </div>
+            <div class="bg-white bg-opacity-20 rounded-full p-4">
+                <i class="fas fa-users text-3xl"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg p-6 text-white">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-purple-100 text-sm font-medium">{{ _('Total Departments') }}</p>
+                <p class="text-3xl font-bold mt-2">{{ total_departments }}</p>
+            </div>
+            <div class="bg-white bg-opacity-20 rounded-full p-4">
+                <i class="fas fa-building text-3xl"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl shadow-lg p-6 text-white">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-orange-100 text-sm font-medium">{{ _('Warranty Expiring Soon') }}</p>
+                <p class="text-3xl font-bold mt-2">{{ warranty_expiring }}</p>
+            </div>
+            <div class="bg-white bg-opacity-20 rounded-full p-4">
+                <i class="fas fa-exclamation-triangle text-3xl"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            {% if session.get('language') == 'ar' %}
+            الأصول حسب النوع
+            {% else %}
+            Assets by Type
+            {% endif %}
+        </h2>
+        <div class="space-y-3">
+            {% for type, count in assets_by_type.items() %}
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center {% if session.get('language') == 'ar' %}ml-3{% else %}mr-3{% endif %}">
+                        <i class="fas fa-{% if type == 'computer' %}desktop{% elif type == 'monitor' %}tv{% elif type == 'printer' %}print{% elif type == 'scanner' %}scanner{% else %}network-wired{% endif %} text-blue-600"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">{{ type|title }}</span>
+                </div>
+                <span class="text-2xl font-bold text-gray-900 dark:text-white">{{ count }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            {% if session.get('language') == 'ar' %}
+            الأصول حسب الحالة
+            {% else %}
+            Assets by Status
+            {% endif %}
+        </h2>
+        <div class="space-y-3">
+            {% for status, count in assets_by_status.items() %}
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="w-3 h-3 rounded-full {% if status == 'in_use' %}bg-green-500{% elif status == 'available' %}bg-blue-500{% elif status == 'under_repair' %}bg-orange-500{% else %}bg-gray-500{% endif %} {% if session.get('language') == 'ar' %}ml-3{% else %}mr-3{% endif %}"></div>
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">{{ status.replace('_', ' ')|title }}</span>
+                </div>
+                <span class="text-2xl font-bold text-gray-900 dark:text-white">{{ count }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% if recent_maintenance %}
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+    <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+        {% if session.get('language') == 'ar' %}
+        آخر أعمال الصيانة
+        {% else %}
+        Recent Maintenance
+        {% endif %}
+    </h2>
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead>
+                <tr>
+                    <th class="px-4 py-3 text-{% if session.get('language') == 'ar' %}right{% else %}left{% endif %} text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                        {% if session.get('language') == 'ar' %}الأصل{% else %}Asset{% endif %}
+                    </th>
+                    <th class="px-4 py-3 text-{% if session.get('language') == 'ar' %}right{% else %}left{% endif %} text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                        {% if session.get('language') == 'ar' %}المشكلة{% else %}Issue{% endif %}
+                    </th>
+                    <th class="px-4 py-3 text-{% if session.get('language') == 'ar' %}right{% else %}left{% endif %} text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                        {% if session.get('language') == 'ar' %}التاريخ{% else %}Date{% endif %}
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                {% for maintenance in recent_maintenance %}
+                <tr>
+                    <td class="px-4 py-3 text-sm text-gray-900 dark:text-white">{{ maintenance.asset.asset_id }}</td>
+                    <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
+                        {% if session.get('language') == 'ar' and maintenance.issue_description_ar %}
+                        {{ maintenance.issue_description_ar[:50] }}...
+                        {% else %}
+                        {{ maintenance.issue_description_en[:50] }}...
+                        {% endif %}
+                    </td>
+                    <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">{{ maintenance.maintenance_date.strftime('%Y-%m-%d') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

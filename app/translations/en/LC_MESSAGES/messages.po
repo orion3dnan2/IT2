@@ -1,0 +1,140 @@
+# English translations
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Language: en\n"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Assets"
+msgstr "Assets"
+
+msgid "Employees"
+msgstr "Employees"
+
+msgid "Maintenance"
+msgstr "Maintenance"
+
+msgid "Logout"
+msgstr "Logout"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Remember Me"
+msgstr "Remember Me"
+
+msgid "Total Assets"
+msgstr "Total Assets"
+
+msgid "Total Employees"
+msgstr "Total Employees"
+
+msgid "Total Departments"
+msgstr "Total Departments"
+
+msgid "Warranty Expiring Soon"
+msgstr "Warranty Expiring Soon"
+
+msgid "Add Asset"
+msgstr "Add Asset"
+
+msgid "Edit Asset"
+msgstr "Edit Asset"
+
+msgid "View Asset"
+msgstr "View Asset"
+
+msgid "Delete Asset"
+msgstr "Delete Asset"
+
+msgid "Asset ID"
+msgstr "Asset ID"
+
+msgid "Asset Type"
+msgstr "Asset Type"
+
+msgid "Brand"
+msgstr "Brand"
+
+msgid "Model"
+msgstr "Model"
+
+msgid "Serial Number"
+msgstr "Serial Number"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Purchase Date"
+msgstr "Purchase Date"
+
+msgid "Warranty Expiry"
+msgstr "Warranty Expiry"
+
+msgid "Location"
+msgstr "Location"
+
+msgid "Department"
+msgstr "Department"
+
+msgid "Assigned To"
+msgstr "Assigned To"
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Submit"
+msgstr "Submit"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Add Employee"
+msgstr "Add Employee"
+
+msgid "Employee ID"
+msgstr "Employee ID"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Job Title"
+msgstr "Job Title"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Phone"
+msgstr "Phone"
+
+msgid "Add Maintenance"
+msgstr "Add Maintenance"
+
+msgid "Maintenance Date"
+msgstr "Maintenance Date"
+
+msgid "Issue Description"
+msgstr "Issue Description"
+
+msgid "Action Taken"
+msgstr "Action Taken"
+
+msgid "Technician Name"
+msgstr "Technician Name"
+
+msgid "Cost"
+msgstr "Cost"

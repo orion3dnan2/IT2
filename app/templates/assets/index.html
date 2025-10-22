@@ -1,0 +1,140 @@
+{% extends "base/dashboard_layout.html" %}
+
+{% block title %}{{ _('Assets') }}{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ _('Assets') }}</h1>
+        <p class="text-gray-600 dark:text-gray-400 mt-1">
+            {% if session.get('language') == 'ar' %}
+            إدارة جميع أصول تكنولوجيا المعلومات
+            {% else %}
+            Manage all IT assets
+            {% endif %}
+        </p>
+    </div>
+    {% if current_user.has_permission('staff') %}
+    <a href="{{ url_for('assets.add') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-lg">
+        <i class="fas fa-plus {% if session.get('language') == 'ar' %}ml-2{% else %}mr-2{% endif %}"></i>
+        {{ _('Add Asset') }}
+    </a>
+    {% endif %}
+</div>
+
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+    <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <input type="text" name="search" value="{{ search }}" placeholder="{{ _('Search') }}..." class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
+        
+        <select name="type" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
+            <option value="">{% if session.get('language') == 'ar' %}كل الأنواع{% else %}All Types{% endif %}</option>
+            <option value="computer" {% if selected_type == 'computer' %}selected{% endif %}>Computer</option>
+            <option value="monitor" {% if selected_type == 'monitor' %}selected{% endif %}>Monitor</option>
+            <option value="printer" {% if selected_type == 'printer' %}selected{% endif %}>Printer</option>
+            <option value="scanner" {% if selected_type == 'scanner' %}selected{% endif %}>Scanner</option>
+            <option value="network" {% if selected_type == 'network' %}selected{% endif %}>Network Device</option>
+        </select>
+        
+        <select name="status" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
+            <option value="">{% if session.get('language') == 'ar' %}كل الحالات{% else %}All Status{% endif %}</option>
+            <option value="available" {% if selected_status == 'available' %}selected{% endif %}>Available</option>
+            <option value="in_use" {% if selected_status == 'in_use' %}selected{% endif %}>In Use</option>
+            <option value="under_repair" {% if selected_status == 'under_repair' %}selected{% endif %}>Under Repair</option>
+            <option value="retired" {% if selected_status == 'retired' %}selected{% endif %}>Retired</option>
+        </select>
+        
+        <button type="submit" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+            <i class="fas fa-search {% if session.get('language') == 'ar' %}ml-2{% else %}mr-2{% endif %}"></i>
+            {{ _('Filter') }}
+        </button>
+    </form>
+</div>
+
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="bg-gray-50 dark:bg-gray-700">
+                <tr>
+                    <th class="px-6 py-3 text-{% if session.get('language') == 'ar' %}right{% else %}left{% endif %} text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">{{ _('Asset ID') }}</th>
+                    <th class="px-6 py-3 text-{% if session.get('language') == 'ar' %}right{% else %}left{% endif %} text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">{{ _('Type') }}</th>
+                    <th class="px-6 py-3 text-{% if session.get('language') == 'ar' %}right{% else %}left{% endif %} text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">{{ _('Brand') }}</th>
+                    <th class="px-6 py-3 text-{% if session.get('language') == 'ar' %}right{% else %}left{% endif %} text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">{{ _('Model') }}</th>
+                    <th class="px-6 py-3 text-{% if session.get('language') == 'ar' %}right{% else %}left{% endif %} text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">{{ _('Status') }}</th>
+                    <th class="px-6 py-3 text-{% if session.get('language') == 'ar' %}right{% else %}left{% endif %} text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">{{ _('Assigned To') }}</th>
+                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                {% for asset in assets.items %}
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{{ asset.asset_id }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
+                        <i class="fas fa-{% if asset.asset_type == 'computer' %}desktop{% elif asset.asset_type == 'monitor' %}tv{% elif asset.asset_type == 'printer' %}print{% elif asset.asset_type == 'scanner' %}scanner{% else %}network-wired{% endif %} {% if session.get('language') == 'ar' %}ml-2{% else %}mr-2{% endif %}"></i>
+                        {{ asset.asset_type|title }}
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">{{ asset.brand }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">{{ asset.model }}</td>
+                    <td class="px-6 py-4 text-sm">
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold {% if asset.status == 'available' %}bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200{% elif asset.status == 'in_use' %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200{% elif asset.status == 'under_repair' %}bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200{% else %}bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200{% endif %}">
+                            {{ asset.status.replace('_', ' ')|title }}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
+                        {% if asset.assigned_employee %}
+                        {{ asset.assigned_employee.name_en }}
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+                    <td class="px-6 py-4 text-sm text-center">
+                        <div class="flex justify-center space-x-2 {% if session.get('language') == 'ar' %}space-x-reverse{% endif %}">
+                            <a href="{{ url_for('assets.view', id=asset.id) }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400" title="View">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            {% if current_user.has_permission('staff') %}
+                            <a href="{{ url_for('assets.edit', id=asset.id) }}" class="text-green-600 hover:text-green-800 dark:text-green-400" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            {% endif %}
+                            {% if current_user.has_permission('admin') %}
+                            <form method="POST" action="{{ url_for('assets.delete', id=asset.id) }}" class="inline" onsubmit="return confirm('Are you sure?')">
+                                <button type="submit" class="text-red-600 hover:text-red-800 dark:text-red-400" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                        {% if session.get('language') == 'ar' %}
+                        لا توجد أصول
+                        {% else %}
+                        No assets found
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    {% if assets.has_prev or assets.has_next %}
+    <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+        <div class="text-sm text-gray-700 dark:text-gray-300">
+            Page {{ assets.page }} of {{ assets.pages }}
+        </div>
+        <div class="flex space-x-2 {% if session.get('language') == 'ar' %}space-x-reverse{% endif %}">
+            {% if assets.has_prev %}
+            <a href="{{ url_for('assets.index', page=assets.prev_num) }}" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600">Previous</a>
+            {% endif %}
+            {% if assets.has_next %}
+            <a href="{{ url_for('assets.index', page=assets.next_num) }}" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600">Next</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

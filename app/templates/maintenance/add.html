@@ -1,0 +1,24 @@
+{% extends "base/dashboard_layout.html" %}
+{% block title %}{{ _('Add Maintenance') }}{% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">{{ _('Add Maintenance') }}</h1>
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+        <form method="POST" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Asset</label><select name="asset_id" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white">{% for asset in assets %}<option value="{{ asset.id }}" {% if selected_asset and selected_asset.id == asset.id %}selected{% endif %}>{{ asset.asset_id }} - {{ asset.brand }} {{ asset.model }}</option>{% endfor %}</select></div>
+                <div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ _('Maintenance Date') }}</label><input type="datetime-local" name="maintenance_date" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white"></div>
+                <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ _('Issue Description') }} (English)</label><textarea name="issue_description_en" required rows="3" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white"></textarea></div>
+                <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ _('Issue Description') }} (Arabic)</label><textarea name="issue_description_ar" rows="3" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white"></textarea></div>
+                <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ _('Action Taken') }} (English)</label><textarea name="action_taken_en" rows="3" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white"></textarea></div>
+                <div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ _('Technician Name') }}</label><input type="text" name="technician_name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white"></div>
+                <div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ _('Cost') }}</label><input type="number" step="0.01" name="cost" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white"></div>
+            </div>
+            <div class="flex justify-end space-x-4">
+                <a href="{{ url_for('maintenance.index') }}" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 dark:text-gray-300">{{ _('Cancel') }}</a>
+                <button type="submit" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">{{ _('Submit') }}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
