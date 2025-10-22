@@ -18,6 +18,9 @@ This is a bilingual (English/Arabic) IT Asset Management web application built w
 - ✅ Added search and filtering capabilities for all entities
 - ✅ Set up PostgreSQL database with seed data
 - ✅ Configured workflow and verified application runs successfully
+- ✅ Added test accounts (admin, staff, viewer)
+- ✅ Improved Arabic language RTL support with custom CSS
+- ✅ Created comprehensive RTL CSS file for proper right-to-left display
 
 ## User Preferences
 
@@ -120,6 +123,7 @@ This is a bilingual (English/Arabic) IT Asset Management web application built w
 - TailwindCSS: CSS framework (cdn.tailwindcss.com) - development only
 - Font Awesome: Icon library (6.4.0 from cdnjs.cloudflare.com)
 - Google Fonts: Cairo (Arabic), Inter (English)
+- Custom RTL CSS: `/static/css/rtl.css` for comprehensive right-to-left support
 
 **Optional Future Integrations** (mentioned in requirements but not yet implemented):
 - Chart.js: For dashboard statistics visualization
@@ -160,6 +164,9 @@ python seed_data.py
 /
 ├── app/
 │   ├── __init__.py              # Flask app factory
+│   ├── static/                  # Static files
+│   │   └── css/
+│   │       └── rtl.css          # RTL support CSS
 │   ├── models/                  # Database models
 │   │   ├── user.py
 │   │   ├── asset.py
