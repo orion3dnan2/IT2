@@ -1,0 +1,99 @@
+Build a complete, professional, bilingual (Arabic + English) IT Asset Management Web Application using Python Flask + MySQL.
+
+🎯 Purpose:
+Create a modern, responsive system for the IT department to manage and track company hardware assets:
+Computers, Monitors, Printers, Scanners, and Network Devices.
+The system should help in inventory management, asset assignment, maintenance tracking, and reporting.
+
+---
+
+🧱 Tech Stack:
+- Backend: Python Flask (with Blueprints & SQLAlchemy ORM)
+- Frontend: HTML5, TailwindCSS (or Bootstrap 5)
+- Database: MySQL (with migrations)
+- Authentication: Flask-Login (Admin / Staff / Viewer roles)
+- Localization: Flask-Babel (Arabic + English with RTL/LTR switch)
+- Charts: Chart.js (for statistics)
+- Export: xlsxwriter & ReportLab (Excel + PDF reports)
+
+---
+
+🎨 UI / UX Design:
+Create a clean, elegant, and responsive dashboard design with:
+- Light/Dark mode toggle
+- Modern color palette: mix of royal blue, silver gray, and emerald green
+- Rounded cards with soft shadows
+- Fixed sidebar + top navbar
+- Icons for quick navigation (FontAwesome or Lucide)
+- Font: “Cairo” or “Tajawal” for Arabic text
+
+📱 Responsive Layout:
+- Fully responsive for all screen sizes (desktop, tablet, mobile)
+- RTL support for Arabic: `<html dir="rtl" lang="ar">`
+- Adaptive sidebar collapses automatically on small screens
+
+---
+
+📦 Modules / Features:
+
+### 1. **Dashboard**
+- Display total devices by category (Computers, Monitors, Printers, Scanners)
+- Pie/Bar charts for asset status: In Use / Available / Under Repair
+- KPI cards showing devices per department and warranty expiry alerts
+
+### 2. **Assets Management**
+- Add/Edit/Delete asset
+- Asset fields:
+  - Asset ID (auto-generated)
+  - Type (Computer / Monitor / Printer / Scanner / Network)
+  - Brand / Model / Serial Number
+  - Status (In Use / Available / Under Repair / Retired)
+  - Purchase Date / Warranty Expiry
+  - Location / Department
+  - Assigned Employee (dropdown)
+- Upload asset image (optional)
+- Filter and search by type, status, or location
+
+### 3. **Employee Management**
+- Add/Edit/Delete employees
+- Fields: name, job title, department, phone, email
+- Assign/unassign assets
+- View employee’s assigned devices
+
+### 4. **Maintenance & History**
+- Log maintenance activities with date, issue, and technician name
+- View device history (who used it, repairs done, etc.)
+
+### 5. **Reports & Exports**
+- Export data to Excel or PDF (Arabic supported fonts)
+- Filter reports by:
+  - Date range
+  - Department
+  - Asset type or status
+- Include Arabic headers in reports for bilingual export
+
+### 6. **Settings**
+- Add/modify departments and asset categories
+- Change system language (Arabic / English)
+- Upload company logo & customize theme colors
+
+---
+
+🔒 Roles & Permissions:
+- **Admin:** full access (CRUD + reports + settings)
+- **Staff:** can view and update assets, generate reports
+- **Viewer/User:** can only view assigned assets
+
+---
+
+⚙️ Deployment Ready:
+- Local: `python app.py`
+- Docker: `docker-compose up --build`
+- Production: Nginx + Gunicorn (Hostinger VPS)
+- `.env` for database credentials
+- Auto-create tables with first run (SQLAlchemy migrations)
+
+---
+
+🧾 Deliverables:
+- Full project structure:
