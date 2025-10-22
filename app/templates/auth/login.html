@@ -3,10 +3,35 @@
 {% block title %}{{ _('Login') }} - IT Asset Management{% endblock %}
 
 {% block body %}
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 px-4">
-    <div class="max-w-md w-full">
+<style>
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+        50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.8); }
+    }
+    .login-container { animation: fadeInUp 0.6s ease-out; }
+    .floating-icon { animation: float 3s ease-in-out infinite; }
+    .glow-button { animation: pulse-glow 2s ease-in-out infinite; }
+</style>
+
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800 px-4 relative overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 1s;"></div>
+    </div>
+    
+    <div class="max-w-md w-full login-container relative z-10">
         <div class="text-center mb-8">
-            <i class="fas fa-server text-6xl text-white mb-4"></i>
+            <div class="inline-block p-4 bg-white bg-opacity-10 rounded-full mb-4 floating-icon">
+                <i class="fas fa-server text-6xl text-white"></i>
+            </div>
             <h1 class="text-4xl font-bold text-white mb-2">
                 {% if session.get('language') == 'ar' %}
                 نظام إدارة الأصول
@@ -23,8 +48,15 @@
             </p>
         </div>
         
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{{ _('Login') }}</h2>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 backdrop-blur-sm bg-opacity-95">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2 text-center">{{ _('Login') }}</h2>
+            <p class="text-gray-600 dark:text-gray-400 text-center mb-6">
+                {% if session.get('language') == 'ar' %}
+                مرحباً بك! الرجاء تسجيل الدخول للمتابعة
+                {% else %}
+                Welcome back! Please login to continue
+                {% endif %}
+            </p>
             
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -72,8 +104,12 @@
                     </label>
                 </div>
                 
-                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg">
-                    {{ _('Login') }}
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105 relative overflow-hidden group">
+                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    <span class="relative flex items-center justify-center">
+                        <i class="fas fa-sign-in-alt {% if session.get('language') == 'ar' %}ml-2{% else %}mr-2{% endif %}"></i>
+                        {{ _('Login') }}
+                    </span>
                 </button>
             </form>
             

@@ -3,6 +3,23 @@
 {% block title %}{{ _('Dashboard') }}{% endblock %}
 
 {% block content %}
+<style>
+    @keyframes slideInDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    .card-animate {
+        animation: scaleIn 0.5s ease-out;
+    }
+    .card-animate:nth-child(1) { animation-delay: 0.1s; }
+    .card-animate:nth-child(2) { animation-delay: 0.2s; }
+    .card-animate:nth-child(3) { animation-delay: 0.3s; }
+    .card-animate:nth-child(4) { animation-delay: 0.4s; }
+</style>
 <div class="mb-6">
     <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ _('Dashboard') }}</h1>
     <p class="text-gray-600 dark:text-gray-400 mt-1">
@@ -15,49 +32,65 @@
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white">
+    <div class="group card-animate bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer">
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-blue-100 text-sm font-medium">{{ _('Total Assets') }}</p>
-                <p class="text-3xl font-bold mt-2">{{ total_assets }}</p>
+                <p class="text-4xl font-bold mt-2 mb-1">{{ total_assets }}</p>
+                <p class="text-blue-200 text-xs">
+                    <i class="fas fa-arrow-up"></i>
+                    {% if session.get('language') == 'ar' %}نشط{% else %}Active{% endif %}
+                </p>
             </div>
-            <div class="bg-white bg-opacity-20 rounded-full p-4">
+            <div class="bg-white bg-opacity-20 rounded-full p-4 transform transition-transform duration-300 group-hover:rotate-12">
                 <i class="fas fa-laptop text-3xl"></i>
             </div>
         </div>
     </div>
     
-    <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl shadow-lg p-6 text-white">
+    <div class="group card-animate bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl shadow-lg p-6 text-white transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer">
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-emerald-100 text-sm font-medium">{{ _('Total Employees') }}</p>
-                <p class="text-3xl font-bold mt-2">{{ total_employees }}</p>
+                <p class="text-4xl font-bold mt-2 mb-1">{{ total_employees }}</p>
+                <p class="text-emerald-200 text-xs">
+                    <i class="fas fa-user-check"></i>
+                    {% if session.get('language') == 'ar' %}مسجلين{% else %}Registered{% endif %}
+                </p>
             </div>
-            <div class="bg-white bg-opacity-20 rounded-full p-4">
+            <div class="bg-white bg-opacity-20 rounded-full p-4 transform transition-transform duration-300 group-hover:scale-110">
                 <i class="fas fa-users text-3xl"></i>
             </div>
         </div>
     </div>
     
-    <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg p-6 text-white">
+    <div class="group card-animate bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg p-6 text-white transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer">
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-purple-100 text-sm font-medium">{{ _('Total Departments') }}</p>
-                <p class="text-3xl font-bold mt-2">{{ total_departments }}</p>
+                <p class="text-4xl font-bold mt-2 mb-1">{{ total_departments }}</p>
+                <p class="text-purple-200 text-xs">
+                    <i class="fas fa-briefcase"></i>
+                    {% if session.get('language') == 'ar' %}قسم{% else %}Divisions{% endif %}
+                </p>
             </div>
-            <div class="bg-white bg-opacity-20 rounded-full p-4">
+            <div class="bg-white bg-opacity-20 rounded-full p-4 transform transition-transform duration-300 group-hover:scale-110">
                 <i class="fas fa-building text-3xl"></i>
             </div>
         </div>
     </div>
     
-    <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl shadow-lg p-6 text-white">
+    <div class="group card-animate bg-gradient-to-br from-orange-500 to-red-500 rounded-xl shadow-lg p-6 text-white transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer {% if warranty_expiring > 0 %}animate-pulse{% endif %}">
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-orange-100 text-sm font-medium">{{ _('Warranty Expiring Soon') }}</p>
-                <p class="text-3xl font-bold mt-2">{{ warranty_expiring }}</p>
+                <p class="text-4xl font-bold mt-2 mb-1">{{ warranty_expiring }}</p>
+                <p class="text-orange-200 text-xs">
+                    <i class="fas fa-clock"></i>
+                    {% if session.get('language') == 'ar' %}يحتاج انتباه{% else %}Needs attention{% endif %}
+                </p>
             </div>
-            <div class="bg-white bg-opacity-20 rounded-full p-4">
+            <div class="bg-white bg-opacity-20 rounded-full p-4 transform transition-transform duration-300 group-hover:scale-110">
                 <i class="fas fa-exclamation-triangle text-3xl"></i>
             </div>
         </div>
@@ -65,50 +98,169 @@
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:shadow-2xl">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+            <i class="fas fa-chart-pie {% if session.get('language') == 'ar' %}ml-2{% else %}mr-2{% endif %} text-blue-600"></i>
             {% if session.get('language') == 'ar' %}
             الأصول حسب النوع
             {% else %}
             Assets by Type
             {% endif %}
         </h2>
-        <div class="space-y-3">
+        <div class="mb-4" style="height: 250px;">
+            <canvas id="assetTypeChart"></canvas>
+        </div>
+        <div class="space-y-2 mt-4">
             {% for type, count in assets_by_type.items() %}
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center {% if session.get('language') == 'ar' %}ml-3{% else %}mr-3{% endif %}">
-                        <i class="fas fa-{% if type == 'computer' %}desktop{% elif type == 'monitor' %}tv{% elif type == 'printer' %}print{% elif type == 'scanner' %}scanner{% else %}network-wired{% endif %} text-blue-600"></i>
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center {% if session.get('language') == 'ar' %}ml-3{% else %}mr-3{% endif %} shadow-md">
+                        <i class="fas fa-{% if type == 'computer' %}desktop{% elif type == 'monitor' %}tv{% elif type == 'printer' %}print{% elif type == 'scanner' %}scanner{% else %}network-wired{% endif %} text-white"></i>
                     </div>
                     <span class="text-gray-700 dark:text-gray-300 font-medium">{{ type|translate_value }}</span>
                 </div>
-                <span class="text-2xl font-bold text-gray-900 dark:text-white">{{ count }}</span>
+                <span class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">{{ count }}</span>
             </div>
             {% endfor %}
         </div>
     </div>
     
-    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:shadow-2xl">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+            <i class="fas fa-chart-bar {% if session.get('language') == 'ar' %}ml-2{% else %}mr-2{% endif %} text-emerald-600"></i>
             {% if session.get('language') == 'ar' %}
             الأصول حسب الحالة
             {% else %}
             Assets by Status
             {% endif %}
         </h2>
-        <div class="space-y-3">
+        <div class="mb-4" style="height: 250px;">
+            <canvas id="assetStatusChart"></canvas>
+        </div>
+        <div class="space-y-2 mt-4">
             {% for status, count in assets_by_status.items() %}
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
                 <div class="flex items-center">
-                    <div class="w-3 h-3 rounded-full {% if status == 'in_use' %}bg-green-500{% elif status == 'available' %}bg-blue-500{% elif status == 'under_repair' %}bg-orange-500{% else %}bg-gray-500{% endif %} {% if session.get('language') == 'ar' %}ml-3{% else %}mr-3{% endif %}"></div>
-                    <span class="text-gray-700 dark:text-gray-300 font-medium">{{ status|translate_value }}</span>
+                    <div class="w-3 h-3 rounded-full {% if status == 'in_use' %}bg-green-500{% elif status == 'available' %}bg-blue-500{% elif status == 'under_repair' %}bg-orange-500{% else %}bg-gray-500{% endif %} {% if session.get('language') == 'ar' %}ml-3{% else %}mr-3{% endif %} shadow-md"></div>
+                    <span class="px-3 py-1 rounded-full text-sm font-semibold {% if status == 'in_use' %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200{% elif status == 'available' %}bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200{% elif status == 'under_repair' %}bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200{% else %}bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200{% endif %}">{{ status|translate_value }}</span>
                 </div>
-                <span class="text-2xl font-bold text-gray-900 dark:text-white">{{ count }}</span>
+                <span class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600">{{ count }}</span>
             </div>
             {% endfor %}
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const isDark = document.documentElement.classList.contains('dark');
+    const textColor = isDark ? '#f3f4f6' : '#1f2937';
+    const gridColor = isDark ? '#374151' : '#e5e7eb';
+    
+    const typeCtx = document.getElementById('assetTypeChart').getContext('2d');
+    const assetTypeChart = new Chart(typeCtx, {
+        type: 'doughnut',
+        data: {
+            labels: [{% for type in assets_by_type.keys() %}'{{ type|translate_value }}'{% if not loop.last %}, {% endif %}{% endfor %}],
+            datasets: [{
+                data: [{% for count in assets_by_type.values() %}{{ count }}{% if not loop.last %}, {% endif %}{% endfor %}],
+                backgroundColor: [
+                    'rgba(59, 130, 246, 0.8)',
+                    'rgba(16, 185, 129, 0.8)',
+                    'rgba(168, 85, 247, 0.8)',
+                    'rgba(245, 158, 11, 0.8)',
+                    'rgba(239, 68, 68, 0.8)'
+                ],
+                borderColor: isDark ? '#1f2937' : '#ffffff',
+                borderWidth: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: isDark ? '#374151' : '#ffffff',
+                    titleColor: textColor,
+                    bodyColor: textColor,
+                    borderColor: gridColor,
+                    borderWidth: 1,
+                    padding: 12,
+                    boxPadding: 6,
+                    usePointStyle: true
+                }
+            }
+        }
+    });
+    
+    const statusCtx = document.getElementById('assetStatusChart').getContext('2d');
+    const assetStatusChart = new Chart(statusCtx, {
+        type: 'bar',
+        data: {
+            labels: [{% for status in assets_by_status.keys() %}'{{ status|translate_value }}'{% if not loop.last %}, {% endif %}{% endfor %}],
+            datasets: [{
+                label: '{% if session.get("language") == "ar" %}عدد الأصول{% else %}Number of Assets{% endif %}',
+                data: [{% for count in assets_by_status.values() %}{{ count }}{% if not loop.last %}, {% endif %}{% endfor %}],
+                backgroundColor: [
+                    'rgba(16, 185, 129, 0.8)',
+                    'rgba(59, 130, 246, 0.8)',
+                    'rgba(245, 158, 11, 0.8)',
+                    'rgba(107, 114, 128, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(16, 185, 129, 1)',
+                    'rgba(59, 130, 246, 1)',
+                    'rgba(245, 158, 11, 1)',
+                    'rgba(107, 114, 128, 1)'
+                ],
+                borderWidth: 2,
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: isDark ? '#374151' : '#ffffff',
+                    titleColor: textColor,
+                    bodyColor: textColor,
+                    borderColor: gridColor,
+                    borderWidth: 1,
+                    padding: 12
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: textColor,
+                        stepSize: 1
+                    },
+                    grid: {
+                        color: gridColor
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: textColor
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
 
 {% if recent_maintenance %}
 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
