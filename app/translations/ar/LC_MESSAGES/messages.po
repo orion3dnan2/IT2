@@ -141,3 +141,48 @@ msgstr "اسم الفني"
 
 msgid "Cost"
 msgstr "التكلفة"
+
+msgid "Computer"
+msgstr "كمبيوتر"
+
+msgid "Monitor"
+msgstr "شاشة"
+
+msgid "Printer"
+msgstr "طابعة"
+
+msgid "Scanner"
+msgstr "ماسح ضوئي"
+
+msgid "Network"
+msgstr "شبكة"
+
+msgid "In Use"
+msgstr "قيد الاستخدام"
+
+msgid "Under Repair"
+msgstr "تحت الصيانة"
+
+msgid "Available"
+msgstr "متاح"
+
+msgid "Retired"
+msgstr "خارج الخدمة"
+
+msgid "Admin"
+msgstr "مدير"
+
+msgid "Staff"
+msgstr "موظف"
+
+msgid "Viewer"
+msgstr "مشاهد"
+
+msgid "System Administrator"
+msgstr "مدير النظام"
+
+msgid "It Staff Member"
+msgstr "موظف تقنية المعلومات"
+
+msgid "Guest Viewer"
+msgstr "مشاهد ضيف"

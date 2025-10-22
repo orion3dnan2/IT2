@@ -37,7 +37,7 @@
                 <i class="fas fa-user-circle text-2xl"></i>
                 <div class="{% if session.get('language') == 'ar' %}mr-3{% else %}ml-3{% endif %}">
                     <p class="text-sm font-semibold">{{ current_user.full_name }}</p>
-                    <p class="text-xs text-blue-200">{{ current_user.role|title }}</p>
+                    <p class="text-xs text-blue-200">{{ current_user.role|translate_value }}</p>
                 </div>
             </div>
             <a href="{{ url_for('auth.logout') }}" class="flex items-center justify-center px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors">

@@ -138,3 +138,48 @@ msgstr "Technician Name"
 
 msgid "Cost"
 msgstr "Cost"
+
+msgid "Computer"
+msgstr "Computer"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "Printer"
+msgstr "Printer"
+
+msgid "Scanner"
+msgstr "Scanner"
+
+msgid "Network"
+msgstr "Network"
+
+msgid "In Use"
+msgstr "In Use"
+
+msgid "Under Repair"
+msgstr "Under Repair"
+
+msgid "Available"
+msgstr "Available"
+
+msgid "Retired"
+msgstr "Retired"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Staff"
+msgstr "Staff"
+
+msgid "Viewer"
+msgstr "Viewer"
+
+msgid "System Administrator"
+msgstr "System Administrator"
+
+msgid "It Staff Member"
+msgstr "IT Staff Member"
+
+msgid "Guest Viewer"
+msgstr "Guest Viewer"

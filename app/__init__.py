@@ -36,6 +36,14 @@ def create_app(config_class=Config):
     
     babel.init_app(app, locale_selector=get_locale)
     
+    @app.template_filter('translate_value')
+    def translate_value_filter(value):
+        from flask_babel import gettext as _
+        if not value:
+            return value
+        value_str = str(value).replace('_', ' ').title()
+        return _(value_str)
+    
     from app.blueprints.auth import bp as auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
     
